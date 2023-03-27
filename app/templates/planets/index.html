@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Planets {% endblock %}
+{% block body%}
+    <h1> Hello Planets!</h1>
+    <ul>
+      {% for planet in planets %}
+        <li>
+          <a href="/planets/{{ planets.slug }}">{{ planets.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="/legal">Download legal details</a>
+{% endblock %}

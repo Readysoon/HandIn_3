@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}The Solar System{% endblock %}
+
+{% block body %}
+  <h1>{{planet.name}}</h1>
+
+  <p>Price: ${{planet.diameter}}</p>
+
+  <footer>
+    <a href="/planets">Back to all planets</a>
+  </footer>
+{% endblock %}
