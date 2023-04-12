@@ -4,11 +4,16 @@
 {% block body%}
     <h1> Hello Planets!</h1>
     <ul>
-      {% for planet in planets %}
+      {% for planet in planets_pagination.items %}
         <li>
-          <a href="/planets/{{ planets.slug }}">{{ planets.name }}</a>
+          <a href="/planets/{{ planet.id }}">{{ planet.name }}</a>
         </li>
       {% endfor %}
     </ul>
+    <nav>
+      <a href="/planets?page={{ planets_pagination.prev_num }}">Previous Page</a>
+      <span> - </span>
+      <a href="/planets?page={{ planets_pagination.next_num }}">Next Page</a>
+    </nav>
     <a href="/legal">Download legal details</a>
 {% endblock %}

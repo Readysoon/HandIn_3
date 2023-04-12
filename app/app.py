@@ -1,5 +1,5 @@
-from . import planets, orders
-from flask import Flask, redirect, url_for, render_template
+from . import planets
+from flask import Flask
 from app.extensions.database import db, migrate
 
 
