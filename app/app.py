@@ -1,4 +1,4 @@
-from . import planets
+from . import planets, orders
 from flask import Flask
 from app.extensions.database import db, migrate
 
@@ -15,6 +15,9 @@ def create_app():
 #Blueprints
 def register_blueprints(app: Flask):
   app.register_blueprint(planets.routes.blueprint)
+  app.register_blueprint(orders.routes.blueprint)
+
+
 
 
 def register_extensions(app: Flask):

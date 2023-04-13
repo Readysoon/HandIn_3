@@ -10,10 +10,24 @@
         </li>
       {% endfor %}
     </ul>
+    <div>
+      <a href="/checkout">Click here to checkout</a>
+    </div>
+    <br>
     <nav>
-      <a href="/planets?page={{ planets_pagination.prev_num }}">Previous Page</a>
+      {% if planets_pagination.prev_num %}
+        <a href="{{ url_for('planets.planets_all', page=planets_pagination.prev_num)}}">Previous Page</a>
+      {% else %}
+        <span>Previous Page</span>
+      {% endif %}
+
       <span> - </span>
-      <a href="/planets?page={{ planets_pagination.next_num }}">Next Page</a>
+
+      {% if planets_pagination.next_num %}
+        <a href="/planets?page={{ planets_pagination.next_num }}">Next Page</a>
+      {% else %}
+        <span>Next Page</span>
+      {% endif %}
     </nav>
     <a href="/legal">Download legal details</a>
 {% endblock %}

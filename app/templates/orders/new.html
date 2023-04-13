@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Cookieshop | Checkout{% endblock %}
+
+# dont know why this comment is not colored in green; 
+# this is jinja for showing a error in case no name was entered; 
+# the function in orders/routes.py was commented out
+# {% if error %}
+#   <p style="color: tomato";>{{ error }}</p>
+# {% endif %}
+
+{% block body %}
+    <h1>Checkout</h1>
+
+    <form method="POST">
+        <h2>Your Order:</h2>
+        <ul>
+            {% for planet in planets %}
+                <li>
+                    <label for="planet_{{ planet.id }}">{{ planet.name }}</label>
+                    <input type="number" name="{{ planet.slug }}" id="planet_{{ planet.id }}" min="0" value="0">
+                </li>
+                {% endfor %}
+        </ul>
+
+        <h2>Your Address:</h2>
+        <div>
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name" placeholder="Jane Cookielover">
+        </div>
+        <div>
+            <label for="street">Street and Number:</label>
+            <input type="text" name="street" id="street" placeholder="Sample Street 24">
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" placeholder="Best Town">
+        </div>
+        <div>
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state" placeholder="Bakerstate">
+        </div>
+        <div>
+            <label for="zip">Zip:</label>
+            <input type="text" name="zip" id="zip" placeholder="12345">
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <input type="text" name="country" id="country" placeholder="Cookieland">
+        </div>
+        <input type="submit" value="Submit Order">
+    </form>
+
+{% endblock %}
+

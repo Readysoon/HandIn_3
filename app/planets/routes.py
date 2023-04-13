@@ -3,10 +3,10 @@ from .models import Planet
 
 blueprint = Blueprint('planets', __name__)
 
-@blueprint.route('/')
-def index():
-   planets_data = Planet.query.all()
-   return render_template('planets/index.html', planets=planets_data)
+# took "@blueprint.route('/')" and moved it to def planets_all() and then commented out the following code:
+# def index():
+#    planets_data = Planet.query.all()
+#    return render_template('planets/index.html', planets=planets_data)
 
 # @blueprint.route('/planets/<slug>')
 # def planets(slug):
@@ -16,6 +16,7 @@ def index():
 #        return 'That planet does not exist.'
 
 @blueprint.route('/planets')
+@blueprint.route('/')
 def planets_all():
    page_number = request.args.get('page', 1, type=int)
    print('=> Page number:', page_number)
