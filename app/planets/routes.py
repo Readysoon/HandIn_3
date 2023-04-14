@@ -36,3 +36,11 @@ def planets(id):
 @blueprint.route('/legal')
 def legal():
   return send_file('static/downloads/legal.txt', as_attachment=True)
+
+@blueprint.route('run-seed')
+def run_seed():
+    if not Planet.query.filter_by(slug='mercury').first():
+        import app.scripts.seed
+        return 'Database seed completed!'
+    else:
+        return 'Nothing to run.'
