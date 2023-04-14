@@ -13,7 +13,7 @@
     <h1>Checkout</h1>
 
     <form method="POST">
-        <h2>Your Order:</h2>
+        <h2>Order a Planet!</h2>
         <ul>
             {% for planet in planets %}
                 <li>
@@ -26,27 +26,23 @@
         <h2>Your Address:</h2>
         <div>
             <label for="name">Full Name</label>
-            <input type="text" name="name" id="name" placeholder="Jane Cookielover">
+            <input type="text" name="name" id="name" placeholder="Alias Alien">
         </div>
         <div>
-            <label for="street">Street and Number:</label>
-            <input type="text" name="street" id="street" placeholder="Sample Street 24">
+            <label for="planet">Home Planet:</label>
+            <input type="text" name="planet" id="planet" placeholder="Earth">
         </div>
         <div>
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city" placeholder="Best Town">
+            <label for="galaxy">Galaxy:</label>
+            <input type="text" name="galaxy" id="galaxy" placeholder="Milky Way">
         </div>
         <div>
-            <label for="state">State:</label>
-            <input type="text" name="state" id="state" placeholder="Bakerstate">
+            <label for="gg">Galaxy group</label>
+            <input type="text" name="gg" id="gg" placeholder="Local Group">
         </div>
         <div>
-            <label for="zip">Zip:</label>
-            <input type="text" name="zip" id="zip" placeholder="12345">
-        </div>
-        <div>
-            <label for="country">Country:</label>
-            <input type="text" name="country" id="country" placeholder="Cookieland">
+            <label for="ngc">NGC Identifier</label>
+            <input type="text" name="ngc" id="ngc" placeholder="MV">
         </div>
         <input type="submit" value="Submit Order">
     </form>

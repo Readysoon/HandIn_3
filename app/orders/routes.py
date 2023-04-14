@@ -1,18 +1,20 @@
 from flask import Blueprint, render_template, request, current_app
 from app.planets.models import Planet
+from flask_login import login_required
 # from .services
 
 blueprint = Blueprint('orders', __name__)
 
 @blueprint.get('/checkout')
+@login_required
 def get_checkout():
     planets = Planet.query.all()
-    return render_template('orders/new.html', planets=planets)
+    return render_template('orders/order.html', planets=planets)
 
 @blueprint.post('/checkout')
 def post_checkout():
     planets = Planet.query.all()
-    return render_template('orders/new.html', planets=planets)
+    return render_template('orders/order.html', planets=planets)
 
 
 # tried to do the validation but 'create_order' does not work, seems I have to create it somewhere first

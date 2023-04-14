@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %} Planets {% endblock %}
+
+{% block head %}
+  <style>
+    .register_login a {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  </style>
+{% endblock %}
+
 {% block body%}
-    <h1> Hello Planets!</h1>
+    <h1>Welcome to the Solar System!</h1>
     <ul>
       {% for planet in planets_pagination.items %}
         <li>
@@ -29,5 +39,11 @@
         <span>Next Page</span>
       {% endif %}
     </nav>
+    <br>
+    <div class="register_login">
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+    </div>
+    <br>
     <a href="/legal">Download legal details</a>
 {% endblock %}
