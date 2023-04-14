@@ -23,4 +23,12 @@ for slug, planet in planets_data.items():
 
 db.session.commit()
 
+@blueprint.route('run-seed')
+def run_seed():
+    if not Planet.query.filter_by(slug='mercury').first():
+        import app.scripts.seed
+        return 'Database seed completed!'
+    else:
+        return 'Nothing to run.'
+
 
