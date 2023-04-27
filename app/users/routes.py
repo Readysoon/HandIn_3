@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from app.users.models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user
+from flask_login import login_user, current_user, logout_user
 
 blueprint = Blueprint('users', __name__)
 
@@ -24,7 +24,7 @@ def post_register():
         user.save()
 
         login_user(user)
-        return redirect(url_for('planets.planets'))
+        return redirect(url_for('orders.get_checkout'))
     except Exception as error_message:
         error = error_message or 'An error occured while creating an user. Please make sure to enter valid data.'
         return render_template('user/register.html', error=error)
@@ -44,7 +44,7 @@ def post_login():
             raise Exception('The password does not appear to be correct.')
         
         login_user(user)
-        return redirect(url_for('planets.planets'))
+        return redirect(url_for('orders.get_checkout'))
     
     except Exception as error_message:
         error = error_message or 'An error occured while logging in. Please verify your email and password'
@@ -52,6 +52,6 @@ def post_login():
 
 @blueprint.get('/logout')
 def logout():
-    login_user()
+    logout_user()
 
-    return redirect(url_for('users.get_login'))
+    return redirect(url_for('planets.planets_all'))

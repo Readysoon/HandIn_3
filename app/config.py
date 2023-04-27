@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from os import environ
 
-PLANETS_PER_PAGE = 4
+PLANETS_PER_PAGE = 8
 
 load_dotenv()
 

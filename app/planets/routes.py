@@ -1,19 +1,9 @@
-from flask import Blueprint, render_template, send_file, request, current_app
+from flask import Blueprint, render_template, send_file, request, current_app, redirect, url_for
 from .models import Planet
+from app.extensions.database import db
 
 blueprint = Blueprint('planets', __name__)
 
-# took "@blueprint.route('/')" and moved it to def planets_all() and then commented out the following code:
-# def index():
-#    planets_data = Planet.query.all()
-#    return render_template('planets/index.html', planets=planets_data)
-
-# @blueprint.route('/planets/<slug>')
-# def planets(slug):
-#     if slug in planets_data:
-#         return '<h1>' + planets_data[slug]['name'] + '</h1><p>' + planets_data[slug]['diameter'] + '</p>'
-#     else:
-#        return 'That planet does not exist.'
 
 @blueprint.route('/planets')
 @blueprint.route('/')
@@ -26,6 +16,42 @@ def planets_all():
    # and this line from '   return render_template('cookies/index.html', planets=all_planets)' to
    return render_template('planets/index.html', planets_pagination=planets_pagination)
     
+@blueprint.route('/planets', methods=['POST'])
+def add_planet():
+    # Get the data from the request form
+    name = request.form.get('name')
+    diameter = request.form.get('diameter')
+    price = request.form.get('price')
+
+    # Create a new planet instance
+    new_planet = Planet(name=name, diameter=diameter, price=price)
+
+    # Add the new planet to the database
+    db.session.add(new_planet)
+    db.session.commit()
+
+    # Redirect the user to the page for the newly created planet
+    return redirect(url_for('planets.planets', id=new_planet.id))
+
+@blueprint.route('/planetsedit/<int:id>', methods=['GET', 'POST'])
+def edit_planet(id):
+    planet = Planet.query.get(id)
+    if request.method == 'POST':
+        planet.name = request.form['name']
+        planet.diameter = request.form['diameter']
+        planet.mass = request.form['mass']
+        planet.price = request.form['price']
+        db.session.commit()
+        return redirect(url_for('planets.planets', id=id))
+    return render_template('planets/edit.html', planet=planet)
+
+@blueprint.route('/planetsdelete/<int:id>', methods=['POST'])
+def delete_planet(id):
+    planet = Planet.query.get(id)
+    if planet is not None:
+        db.session.delete(planet)
+        db.session.commit()
+    return redirect(url_for('planets.planets_all'))
 
 # grabs the first entry of the database based on codecookies -> CRUD 
 @blueprint.route('/planets/<id>')

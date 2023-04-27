@@ -1,0 +1,28 @@
+.register_login {
+    margin-top: 30px;
+}
+
+.prefooter {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.prefooter div {
+    display: flex;
+    align-items: center;
+}
+
+.legal {
+    margin-right: 20px;
+}
+
+ul li {
+    display: inline;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.add-planet-form {
+    margin-top: 30px;
+}

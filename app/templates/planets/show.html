@@ -5,7 +5,31 @@
 {% block body %}
   <h1>{{planet.name}}</h1>
 
-  <p>Diameter: {{planet.diameter}} km</p>
+  <div>
+    <p>Diameter: {{planet.diameter}} km</p>
+
+    <p>Mass: {{planet.mass}} * 10^24 kg</p>
+
+    <p>Price: {{planet.price}} Credits</p>
+  </div>
+
+  <div class="edit-planet-form">
+    <form method="post" action="{{ url_for('planets.edit_planet', id=planet.id) }}">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="diameter">Diameter:</label>
+      <input type="text" id="diameter" name="diameter" required>
+      <label for="mass">Mass:</label>
+      <input type="int" id="mass" name="mass" required>
+      <label for="price">Price</label>
+      <input type="int" id="price" name="price" required>
+      <button type="submit">Change Planet</button>
+    </form>
+  </div>
+
+  <form method="post" action="{{ url_for('planets.delete_planet', id=planet.id) }}">
+    <button type="submit">Delete</button>
+</form>
 
   <footer>
     <a href="/planets">Back to all planets</a>

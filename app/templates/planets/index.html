@@ -2,17 +2,28 @@
 
 {% block title %} Planets {% endblock %}
 
-{% block head %}
+{% block style %}
   <style>
     .register_login a {
       display: inline-block;
       margin-right: 10px;
     }
+    img {
+      width: 100%;
+      height: auto;
+    }
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   </style>
+  <link rel="stylesheet" href="static/css/index.css">
 {% endblock %}
 
-{% block body%}
+{% block body %}
     <h1>Welcome to the Solar System!</h1>
+    <img src="{{url_for('static', filename='images/Solar_system_labeled.jpg')}}" alt="The Solar System">
     <ul>
       {% for planet in planets_pagination.items %}
         <li>
@@ -20,30 +31,54 @@
         </li>
       {% endfor %}
     </ul>
-    <div>
-      <a href="/checkout">Click here to checkout</a>
-    </div>
-    <br>
+
     <nav>
       {% if planets_pagination.prev_num %}
         <a href="{{ url_for('planets.planets_all', page=planets_pagination.prev_num)}}">Previous Page</a>
       {% else %}
         <span>Previous Page</span>
       {% endif %}
-
       <span> - </span>
-
       {% if planets_pagination.next_num %}
         <a href="/planets?page={{ planets_pagination.next_num }}">Next Page</a>
       {% else %}
         <span>Next Page</span>
       {% endif %}
     </nav>
+
+    <div class="add-planet-form">
+      <form method="post" action="{{ url_for('planets.add_planet') }}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="diameter">Diameter:</label>
+        <input type="text" id="diameter" name="diameter" required>
+        <label for="price">Price</label>
+        <input type="int" id="pricer" name="price" required>
+        <button type="submit">Add Planet</button>
+      </form>
+    </div>
+    
     <br>
     <div class="register_login">
       <a href="/register">Register</a>
       <a href="/login">Login</a>
     </div>
     <br>
-    <a href="/legal">Download legal details</a>
+    <div class="prefooter">
+      <div class="legal">
+        <a href="/legal">Download legal details</a>
+      </div>
+      <div class="colorpicker">
+        <label for="colorpicker">Select a color:</label>
+        <input type="color" id="colorpicker" name="colorpicker" value="#000000">
+      </div>
+    </div>
+    <script>
+      const colorpicker = document.getElementById('colorpicker');
+      const body = document.querySelector('body');
+      colorpicker.addEventListener('input', function() {
+        console.log(colorpicker.value);
+        body.style.backgroundColor = colorpicker.value;
+      });
+    </script>
 {% endblock %}

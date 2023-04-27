@@ -5,6 +5,8 @@ class Planet(db.Model, CRUDMixin):
     slug = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
     diameter = db.Column(db.Numeric(10,2))
+    mass = db.Column(db.Numeric(10,2))
+    price = db.Column(db.Numeric(10,2))
 
 def test_planet_update(client):
     # update planet's properties
