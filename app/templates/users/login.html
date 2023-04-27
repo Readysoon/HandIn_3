@@ -2,9 +2,32 @@
 
 {% block title %}Planetshop | Login{% endblock %}
 
+{% block style %}
+  <style>
+    .top_buttons {
+        margin-bottom: 20px;
+    }
+  </style>
+{% endblock %}
+
 {% block body %}
 
 <h1> Login </h1>
+
+{% if error %}
+    <p>{{ error }}</p>
+    <form class="top_buttons" method="GET" action="{{url_for('users.get_register')}}">
+        <button>
+            Back to register
+        </button>
+    </form>
+{% else %}
+<form  class="top_buttons" method="GET" action="{{url_for('planets.planets_all')}}">
+    <button>
+        Back to Home
+    </button>
+</form>
+{% endif %}
 
 <form method="POST">
     <div>

@@ -10,7 +10,14 @@
 # {% endif %}
 
 {% block body %}
+
     <h1>Checkout</h1>
+
+    <form method="get" action="{{url_for('planets.planets_all') }}">
+        <button>
+            Go back to main
+        </button>
+    </form>
 
     <form method="POST">
         <h2>Order a Planet!</h2>
